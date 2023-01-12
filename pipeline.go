@@ -1,5 +1,6 @@
 package gopipe
 
+// Pipeline interface.
 type Pipeline[T any] interface {
     Send(T) Pipeline[T]
     Through(middlewares ...func(t T, next func())) Pipeline[T]
@@ -11,15 +12,18 @@ type pipeline[T any] struct {
     middlewares []func(func(T)) func(T)
 }
 
+// NewPipeline new Pipeline.
 func NewPipeline[T any]() Pipeline[T] {
     return &pipeline[T]{}
 }
 
+// Send set parameter to all pipes.
 func (m *pipeline[T]) Send(t T) Pipeline[T] {
     m.t = t
     return m
 }
 
+// Through add middlewares to pipeline.
 func (m *pipeline[T]) Through(middlewares ...func(t T, next func())) Pipeline[T] {
     for idx := range middlewares {
         middleware := middlewares[idx]
@@ -32,6 +36,7 @@ func (m *pipeline[T]) Through(middlewares ...func(t T, next func())) Pipeline[T]
     return m
 }
 
+// Then run core logic.
 func (m *pipeline[T]) Then(f func(T)) {
     var fn func(T) = f
     for idx := range m.middlewares {
