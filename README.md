@@ -1,6 +1,12 @@
 # go pipeline
 
+[![test](https://github.com/duc-cnzj/gopipe/actions/workflows/test.yaml/badge.svg)](https://github.com/duc-cnzj/gopipe/actions/workflows/test.yaml) [![codecov](https://codecov.io/gh/duc-cnzj/gopipe/branch/master/graph/badge.svg?token=ATZKDOBGOO)](https://codecov.io/gh/duc-cnzj/gopipe)
+
 ## usage
+
+```shell
+go get -u github.com/duc-cnzj/gopipe
+```
 
 ```go
 package main
